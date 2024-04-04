@@ -17,7 +17,7 @@ services:
       - backend
 
   db:
-    image: postgres:15
+    image: postgres:latest
     environment:
       POSTGRES_DB: diplom
       POSTGRES_USER: postgres
