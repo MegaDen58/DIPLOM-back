@@ -3,7 +3,6 @@ package com.example.diplom.service;
 import com.example.diplom.dto.UserDto;
 import com.example.diplom.model.User;
 import com.example.diplom.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,6 +17,7 @@ public class UserService {
         User user = new User();
         user.setLogin(userDto.getLogin());
         user.setPassword(userDto.getPassword());
+        user.setEmail(userDto.getEmail());
         return userRepository.save(user);
     }
 
