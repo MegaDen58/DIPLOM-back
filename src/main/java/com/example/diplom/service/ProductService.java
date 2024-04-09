@@ -34,10 +34,10 @@ public class ProductService {
         return productDtos;
     }
 
-    public ProductDto saveProduct(ProductDto productDto) {
+    public Product saveProduct(ProductDto productDto) {
         Product product = convertToEntity(productDto);
         Product savedProduct = productRepository.save(product);
-        return convertToDto(savedProduct);
+        return productRepository.save(savedProduct);
     }
 
     public List<String> uploadImages(MultipartFile[] files) throws IOException {
