@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -69,11 +70,21 @@ public class ProductController {
         try {
             // Генерируем уникальное имя для изображения
             String fileName = UUID.randomUUID().toString() + ".png";
+
+            // Получаем абсолютный путь к папке uploads/images
+            String uploadDir = resourceLoader.getResource("classpath:/uploads/images/").getFile().getAbsolutePath();
+
+            // Создаем папку, если она не существует
+            File directory = new File(uploadDir);
+            if (!directory.exists()){
+                directory.mkdirs();
+            }
+
             // Сохраняем файл на сервере
             byte[] bytes = image.getBytes();
-            String uploadDir = "classpath:/uploads/images/";
-            Path path = Paths.get(uploadDir + fileName);
+            Path path = Paths.get(uploadDir + File.separator + fileName);
             Files.write(path, bytes);
+
             // Возвращаем URL загруженного изображения
             String imageUrl = "http://94.228.112.46:8080/api/products/" + fileName;
             return ResponseEntity.ok(imageUrl);
