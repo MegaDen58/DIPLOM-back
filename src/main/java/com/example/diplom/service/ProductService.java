@@ -74,4 +74,8 @@ public class ProductService {
         product.setImages(productDto.getImages());
         return product;
     }
+
+    public void deleteProduct(Long id){
+        productRepository.deleteById(id);
+    }
 }
