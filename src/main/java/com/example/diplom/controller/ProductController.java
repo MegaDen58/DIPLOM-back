@@ -17,6 +17,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/products")
@@ -66,13 +67,15 @@ public class ProductController {
             return ResponseEntity.badRequest().body("No image uploaded");
         }
         try {
-            // Сохранение файла на сервере
+            // Генерируем уникальное имя для изображения
+            String fileName = UUID.randomUUID().toString() + ".png";
+            // Сохраняем файл на сервере
             byte[] bytes = image.getBytes();
             String uploadDir = "classpath:/uploads/images/";
-            Path path = Paths.get(uploadDir + image.getOriginalFilename());
+            Path path = Paths.get(uploadDir + fileName);
             Files.write(path, bytes);
-            // Возвращение URL загруженного изображения
-            String imageUrl = "http://94.228.112.46:8080/" + uploadDir + image.getOriginalFilename();
+            // Возвращаем URL загруженного изображения
+            String imageUrl = "http://94.228.112.46:8080/api/products/" + fileName;
             return ResponseEntity.ok(imageUrl);
         } catch (IOException e) {
             e.printStackTrace();
