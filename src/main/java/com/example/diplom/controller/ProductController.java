@@ -71,7 +71,7 @@ public class ProductController {
             String fileName = UUID.randomUUID().toString() + ".png";
             // Сохраняем файл на сервере
             byte[] bytes = image.getBytes();
-            String uploadDir = "/uploads/images/";
+            String uploadDir = "classpath:/uploads/images/";
             Path path = Paths.get(uploadDir + fileName);
             Files.write(path, bytes);
             // Возвращаем URL загруженного изображения
