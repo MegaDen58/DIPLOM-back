@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -71,29 +72,20 @@ public class ProductController {
             // Генерируем уникальное имя для изображения
             String fileName = UUID.randomUUID().toString() + ".png";
 
-            // Получаем абсолютный путь к папке uploads/images
-            String uploadDir = resourceLoader.getResource("classpath:/uploads/images/").getFile().getAbsolutePath();
-
-            // Создаем папку, если она не существует
-            File directory = new File(uploadDir);
-            if (!directory.exists()){
-                directory.mkdirs();
-            }
+            // Получаем путь к папке uploads/images внутри JAR-файла
+            Path path = Paths.get(getClass().getResource("/uploads/images/").toURI());
 
             // Сохраняем файл на сервере
             byte[] bytes = image.getBytes();
-            Path path = Paths.get(uploadDir + File.separator + fileName);
-            Files.write(path, bytes);
+            Path filePath = Paths.get(path.toString(), fileName);
+            Files.write(filePath, bytes);
 
             // Возвращаем URL загруженного изображения
             String imageUrl = "http://94.228.112.46:8080/api/products/" + fileName;
             return ResponseEntity.ok(imageUrl);
-        } catch (IOException e) {
+        } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload image");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to get image name");
         }
     }
 
