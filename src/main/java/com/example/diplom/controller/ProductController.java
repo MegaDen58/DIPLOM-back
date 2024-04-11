@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -56,6 +57,26 @@ public class ProductController {
         } catch (IOException e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
+    @PostMapping("/upload/image")
+    public ResponseEntity<String> uploadImage(@RequestParam("image") MultipartFile image) {
+        if (image.isEmpty()) {
+            return ResponseEntity.badRequest().body("No image uploaded");
+        }
+        try {
+            // Сохранение файла на сервере
+            byte[] bytes = image.getBytes();
+            String uploadDir = "classpath:/uploads/images/";
+            Path path = Paths.get(uploadDir + image.getOriginalFilename());
+            Files.write(path, bytes);
+            // Возвращение URL загруженного изображения
+            String imageUrl = "http://94.228.112.46:8080/" + uploadDir + image.getOriginalFilename();
+            return ResponseEntity.ok(imageUrl);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload image");
         }
     }
 
