@@ -14,6 +14,8 @@ FROM openjdk:17-jdk-alpine
 # Копируем собранный JAR-файл из предыдущего этапа в новый контейнер
 COPY --from=build /app/target/Diplom-0.0.1-SNAPSHOT.jar /app/Diplom-0.0.1-SNAPSHOT.jar
 
+COPY src/main/resources/uploads/images/ /app/src/main/resources/uploads/images/
+
 # Указываем порт, который будет открыт в контейнере
 EXPOSE 8080
 

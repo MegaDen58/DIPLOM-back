@@ -3,7 +3,10 @@ package com.example.diplom.controller;
 import com.example.diplom.dto.ProductDto;
 import com.example.diplom.model.Product;
 import com.example.diplom.service.ProductService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpStatus;
@@ -14,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -25,6 +27,10 @@ import java.util.UUID;
 @RequestMapping("/api/products")
 public class ProductController {
 
+    private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
+
+    @Value("${file.upload-dir}")
+    private String uploadDir;
     private final ProductService productService;
     private final ResourceLoader resourceLoader;
 
@@ -72,18 +78,16 @@ public class ProductController {
             // Генерируем уникальное имя для изображения
             String fileName = UUID.randomUUID().toString() + ".png";
 
-            // Получаем путь к папке uploads/images внутри JAR-файла
-            Path path = Paths.get(getClass().getResource("/uploads/images/").toURI());
+            // Полный путь для сохранения файла на сервере
+            Path path = Paths.get(uploadDir + fileName);
 
             // Сохраняем файл на сервере
-            byte[] bytes = image.getBytes();
-            Path filePath = Paths.get(path.toString(), fileName);
-            Files.write(filePath, bytes);
+            Files.write(path, image.getBytes());
 
             // Возвращаем URL загруженного изображения
-            String imageUrl = "http://94.228.112.46:8080/api/products/" + fileName;
+            String imageUrl = "http://94.228.112.46:8080/uploads/images/" + fileName;
             return ResponseEntity.ok(imageUrl);
-        } catch (IOException | URISyntaxException e) {
+        } catch (IOException e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload image");
         }
