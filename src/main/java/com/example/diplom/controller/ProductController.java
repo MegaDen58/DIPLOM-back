@@ -3,6 +3,7 @@ package com.example.diplom.controller;
 import com.example.diplom.dto.ProductDto;
 import com.example.diplom.model.Product;
 import com.example.diplom.service.ProductService;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -85,11 +86,28 @@ public class ProductController {
             Files.write(path, image.getBytes());
 
             // Возвращаем URL загруженного изображения
-            String imageUrl = "http://94.228.112.46:8080/uploads/images/" + fileName;
+            String imageUrl = "http://94.228.112.46:8080/app/src/main/resources/uploads/images" + fileName;
             return ResponseEntity.ok(imageUrl);
         } catch (IOException e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload image");
+        }
+    }
+
+    @GetMapping("/image/{imageName}")
+    public ResponseEntity<byte[]> getImageByName(@PathVariable String imageName) {
+        try {
+            // Формируем путь к файлу внутри контейнера
+            String imagePath = "/app/src/main/resources/uploads/images/" + imageName;
+            Resource resource = resourceLoader.getResource("file:" + imagePath);
+            InputStream inputStream = resource.getInputStream();
+            byte[] imageBytes = IOUtils.toByteArray(inputStream);
+            return ResponseEntity.ok()
+                    .contentType(MediaType.IMAGE_PNG)
+                    .body(imageBytes);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
 
