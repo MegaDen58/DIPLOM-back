@@ -77,7 +77,7 @@ public class ProductController {
         }
         try {
             // Генерируем уникальное имя для изображения
-            String fileName = UUID.randomUUID().toString() + ".png";
+            String fileName = image.getName();
 
             // Полный путь для сохранения файла на сервере
             Path path = Paths.get(uploadDir + fileName);
