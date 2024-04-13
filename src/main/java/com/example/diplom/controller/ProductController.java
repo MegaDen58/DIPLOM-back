@@ -3,6 +3,7 @@ package com.example.diplom.controller;
 import com.example.diplom.dto.ProductDto;
 import com.example.diplom.model.Product;
 import com.example.diplom.service.ProductService;
+import lombok.extern.java.Log;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -77,8 +78,8 @@ public class ProductController {
         }
         try {
             // Генерируем уникальное имя для изображения
-            String fileName = image.getName();
-
+            String fileName = image.getOriginalFilename();
+            logger.info(fileName);
             // Полный путь для сохранения файла на сервере
             Path path = Paths.get(uploadDir + fileName);
 
@@ -86,7 +87,7 @@ public class ProductController {
             Files.write(path, image.getBytes());
 
             // Возвращаем URL загруженного изображения
-            String imageUrl = "http://94.228.112.46:8080/app/src/main/resources/uploads/images" + fileName;
+            String imageUrl = "http://94.228.112.46:8080/app/src/main/resources/uploads/images/" + fileName;
             return ResponseEntity.ok(imageUrl);
         } catch (IOException e) {
             e.printStackTrace();
