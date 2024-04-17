@@ -48,6 +48,11 @@ public class ProductController {
         return ResponseEntity.ok(products);
     }
 
+    @GetMapping("/product/{imageName}")
+    public ResponseEntity<Product> getProductByImage(@PathVariable String imageName) {
+        Product product = productService.getProductByImage(imageName);
+        return ResponseEntity.ok(product);
+    }
     @PostMapping("/create")
     public ResponseEntity<Product> createProduct(@RequestBody ProductDto productDto) {
         Product savedProduct = productService.saveProduct(productDto);

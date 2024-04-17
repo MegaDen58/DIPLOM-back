@@ -40,6 +40,11 @@ public class ProductService {
         return productRepository.save(savedProduct);
     }
 
+    public Product getProductByImage(String image){
+        Product product = productRepository.findProductByImage(image);
+        return product;
+    }
+
     public List<String> uploadImages(MultipartFile[] files) throws IOException {
         List<String> imagePaths = new ArrayList<>();
         for (MultipartFile file : files) {
