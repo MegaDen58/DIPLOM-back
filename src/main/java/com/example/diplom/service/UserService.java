@@ -1,9 +1,12 @@
 package com.example.diplom.service;
 
+import com.example.diplom.dto.AddFavouriteRequest;
 import com.example.diplom.dto.UserDto;
 import com.example.diplom.model.User;
 import com.example.diplom.repository.UserRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserService {
@@ -19,6 +22,18 @@ public class UserService {
         user.setPassword(userDto.getPassword());
         user.setEmail(userDto.getEmail());
         return userRepository.save(user);
+    }
+
+    public User addFavorite(AddFavouriteRequest favourite) {
+        User user = userRepository.findById(favourite.getUserId()).orElseThrow(() -> new RuntimeException("User not found"));
+        List<Integer> favourites = user.getFavourites();
+        if (!favourites.contains(favourite.getProductId())) {
+            favourites.add(favourite.getProductId());
+            user.setFavourites(favourites);
+            return userRepository.save(user);
+        } else {
+            return user;
+        }
     }
 
     public User loginUser(UserDto userDto) {

@@ -7,6 +7,7 @@ import com.example.diplom.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.example.diplom.dto.AddFavouriteRequest;
 
 import java.util.List;
 
@@ -36,6 +37,12 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
+
+    @PostMapping("/addFavorite")
+    public User addFavorite(@RequestBody AddFavouriteRequest request) {
+        return userService.addFavorite(request);
+    }
+
     @GetMapping("/all")
     public List<User> getAllUsers() {
         return userRepository.findAll();
