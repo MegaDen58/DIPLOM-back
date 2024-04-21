@@ -59,6 +59,11 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.CREATED).body(savedProduct);
     }
 
+    @GetMapping("/user/{userId}/favorites")
+    public List<Product> getUserFavorites(@PathVariable Long userId) {
+        return productService.getUserFavourites(userId);
+    }
+
     @GetMapping("/{productId}/image")
     public ResponseEntity<byte[]> getProductImage(@PathVariable Long productId) {
         try {

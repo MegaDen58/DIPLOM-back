@@ -2,7 +2,9 @@ package com.example.diplom.service;
 
 import com.example.diplom.dto.ProductDto;
 import com.example.diplom.model.Product;
+import com.example.diplom.model.User;
 import com.example.diplom.repository.ProductRepository;
+import com.example.diplom.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,12 +18,14 @@ import java.util.UUID;
 @Service
 public class ProductService {
     private final ProductRepository productRepository;
+    private final UserRepository userRepository;
 
     @Value("${file.upload-dir}")
     private String uploadDir;
 
-    public ProductService(ProductRepository productRepository) {
+    public ProductService(ProductRepository productRepository, UserRepository userRepository) {
         this.productRepository = productRepository;
+        this.userRepository = userRepository;
     }
 
     public List<ProductDto> getAllProducts() {
@@ -43,6 +47,23 @@ public class ProductService {
     public Product getProductByImage(String image){
         Product product = productRepository.findProductByImage(image);
         return product;
+    }
+
+    public List<Product> getUserFavourites(Long userId) {
+        User user = userRepository.findById(userId).orElse(null);
+        if (user != null) {
+            // Получаем список избранных продуктов пользователя
+            List<Integer> favoriteIds = user.getFavourites();
+            List<Product> favoriteProducts = new ArrayList<>();
+            for (Integer productId : favoriteIds) {
+                // В данном примере просто создаем объект ProductDto с id продукта
+                Product product = productRepository.findProductById(productId);
+                favoriteProducts.add(product);
+            }
+            return favoriteProducts;
+        } else {
+            return new ArrayList<>();
+        }
     }
 
     public List<String> uploadImages(MultipartFile[] files) throws IOException {
