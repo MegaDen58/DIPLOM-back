@@ -40,11 +40,11 @@ public class UserController {
 
     @PostMapping("/addFavourite")
     public User addFavorite(@RequestBody FavouriteRequest request) {
-        return userService.addFavorite(request);
+        return userService.addFavourite(request);
     }
     @PostMapping("/removeFavourite")
     public User removeFavorite(@RequestBody FavouriteRequest request) {
-        return userService.removeFavorite(request);
+        return userService.removeFavourite(request);
     }
 
     @GetMapping("/all")

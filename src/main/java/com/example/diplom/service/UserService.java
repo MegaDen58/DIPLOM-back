@@ -24,7 +24,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User addFavorite(FavouriteRequest favourite) {
+    public User addFavourite(FavouriteRequest favourite) {
         User user = userRepository.findById(favourite.getUserId()).orElseThrow(() -> new RuntimeException("User not found"));
         List<Integer> favourites = user.getFavourites();
         if (!favourites.contains(favourite.getProductId())) {
@@ -36,7 +36,7 @@ public class UserService {
         }
     }
 
-    public User removeFavorite(FavouriteRequest favorite) {
+    public User removeFavourite(FavouriteRequest favorite) {
         User user = userRepository.findById(favorite.getUserId()).orElseThrow(() -> new RuntimeException("User not found"));
         List<Integer> favorites = user.getFavourites();
         if (favorites.contains(favorite.getProductId())) {
