@@ -38,11 +38,11 @@ public class UserController {
         }
     }
 
-    @PostMapping("/addFavorite")
+    @PostMapping("/addFavourite")
     public User addFavorite(@RequestBody FavouriteRequest request) {
         return userService.addFavorite(request);
     }
-    @PostMapping("/removeFavorite")
+    @PostMapping("/removeFavourite")
     public User removeFavorite(@RequestBody FavouriteRequest request) {
         return userService.removeFavorite(request);
     }
