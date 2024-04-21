@@ -59,7 +59,7 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.CREATED).body(savedProduct);
     }
 
-    @GetMapping("/user/{userId}/favorites")
+    @GetMapping("/user/{userId}/favourites")
     public List<Product> getUserFavorites(@PathVariable Long userId) {
         return productService.getUserFavourites(userId);
     }
