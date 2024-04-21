@@ -1,6 +1,6 @@
 package com.example.diplom.dto;
 
-public class AddFavouriteRequest {
+public class FavouriteRequest {
     private Long userId;
     private Integer productId;
 

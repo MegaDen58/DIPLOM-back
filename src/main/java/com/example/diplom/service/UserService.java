@@ -1,6 +1,6 @@
 package com.example.diplom.service;
 
-import com.example.diplom.dto.AddFavouriteRequest;
+import com.example.diplom.dto.FavouriteRequest;
 import com.example.diplom.dto.UserDto;
 import com.example.diplom.model.User;
 import com.example.diplom.repository.UserRepository;
@@ -24,12 +24,24 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User addFavorite(AddFavouriteRequest favourite) {
+    public User addFavorite(FavouriteRequest favourite) {
         User user = userRepository.findById(favourite.getUserId()).orElseThrow(() -> new RuntimeException("User not found"));
         List<Integer> favourites = user.getFavourites();
         if (!favourites.contains(favourite.getProductId())) {
             favourites.add(favourite.getProductId());
             user.setFavourites(favourites);
+            return userRepository.save(user);
+        } else {
+            return user;
+        }
+    }
+
+    public User removeFavorite(FavouriteRequest favorite) {
+        User user = userRepository.findById(favorite.getUserId()).orElseThrow(() -> new RuntimeException("User not found"));
+        List<Integer> favorites = user.getFavourites();
+        if (favorites.contains(favorite.getProductId())) {
+            favorites.remove(favorite.getProductId());
+            user.setFavourites(favorites);
             return userRepository.save(user);
         } else {
             return user;

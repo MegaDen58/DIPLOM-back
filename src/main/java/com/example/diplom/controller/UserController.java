@@ -7,7 +7,7 @@ import com.example.diplom.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.example.diplom.dto.AddFavouriteRequest;
+import com.example.diplom.dto.FavouriteRequest;
 
 import java.util.List;
 
@@ -39,8 +39,12 @@ public class UserController {
     }
 
     @PostMapping("/addFavorite")
-    public User addFavorite(@RequestBody AddFavouriteRequest request) {
+    public User addFavorite(@RequestBody FavouriteRequest request) {
         return userService.addFavorite(request);
+    }
+    @PostMapping("/removeFavorite")
+    public User removeFavorite(@RequestBody FavouriteRequest request) {
+        return userService.removeFavorite(request);
     }
 
     @GetMapping("/all")
