@@ -26,6 +26,9 @@ public class User {
     @Column(unique = true, name="email")
     private String email;
 
+    @Column(name="balance")
+    private int balance;
+
     @ElementCollection
     @Column(name="favourites")
     private List<Integer> favourites;
