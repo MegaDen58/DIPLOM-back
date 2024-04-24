@@ -27,7 +27,7 @@ public class User {
     private String email;
 
     @Column(name="balance")
-    private int balance;
+    private Integer balance;
 
     @ElementCollection
     @Column(name="favourites")
