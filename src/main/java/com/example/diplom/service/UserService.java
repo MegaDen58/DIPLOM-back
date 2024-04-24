@@ -23,7 +23,7 @@ public class UserService {
         user.setEmail(userDto.getEmail());
         return userRepository.save(user);
     }
-    public void setUserBalance(Long userId, int balance) {
+    public void setUserBalance(Long userId, Integer balance) {
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
         user.setBalance(balance);
         userRepository.save(user);

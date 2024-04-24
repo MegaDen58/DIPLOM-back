@@ -15,7 +15,7 @@ public class UserDto {
     private String password;
     private String email;
     private List<Integer> favourites;
-    private int balance;
+    private Integer balance;
 
     public UserDto(String login, String password){
         this.login = login;

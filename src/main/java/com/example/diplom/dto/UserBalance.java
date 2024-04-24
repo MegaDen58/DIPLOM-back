@@ -2,7 +2,7 @@ package com.example.diplom.dto;
 
 public class UserBalance {
     private Long userId;
-    private int balance;
+    private Integer balance;
 
     public Long getUserId() {
         return userId;
@@ -12,7 +12,7 @@ public class UserBalance {
         this.userId = userId;
     }
 
-    public int getBalance() {
+    public Integer getBalance() {
         return balance;
     }
 
