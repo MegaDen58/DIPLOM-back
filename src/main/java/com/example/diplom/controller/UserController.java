@@ -1,5 +1,6 @@
 package com.example.diplom.controller;
 
+import com.example.diplom.dto.UserBalance;
 import com.example.diplom.dto.UserDto;
 import com.example.diplom.model.User;
 import com.example.diplom.repository.UserRepository;
@@ -60,5 +61,11 @@ public class UserController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @PostMapping("/user/setBalance")
+    public ResponseEntity<String> setUserBalance(@RequestBody UserBalance request) {
+        userService.setUserBalance(request.getUserId(), request.getBalance());
+        return ResponseEntity.ok("Balance set successfully");
     }
 }
