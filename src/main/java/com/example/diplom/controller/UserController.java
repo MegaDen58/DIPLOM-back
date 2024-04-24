@@ -63,7 +63,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/user/setBalance")
+    @PostMapping("/setBalance")
     public ResponseEntity<String> setUserBalance(@RequestBody UserBalance request) {
         userService.setUserBalance(request.getUserId(), request.getBalance());
         return ResponseEntity.ok("Balance set successfully");
