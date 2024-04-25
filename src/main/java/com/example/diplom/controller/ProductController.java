@@ -125,7 +125,7 @@ public class ProductController {
     }
 
     @PostMapping("/setPrice")
-    public ResponseEntity<String> setUserBalance(@RequestBody ProductPrice request) {
+    public ResponseEntity<String> setProductPrice(@RequestBody ProductPrice request) {
         productService.setProductPrice(request.getProductId(), request.getPrice());
         return ResponseEntity.ok("Price set successfully");
     }
