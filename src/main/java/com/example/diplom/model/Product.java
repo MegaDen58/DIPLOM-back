@@ -24,7 +24,8 @@ public class Product {
 
     private String description;
 
-    private int count;
+    private Integer count;
+    private Integer price;
 
     private boolean winter;
 

@@ -1,6 +1,8 @@
 package com.example.diplom.controller;
 
 import com.example.diplom.dto.ProductDto;
+import com.example.diplom.dto.ProductPrice;
+import com.example.diplom.dto.UserBalance;
 import com.example.diplom.model.Product;
 import com.example.diplom.service.ProductService;
 import lombok.extern.java.Log;
@@ -120,6 +122,12 @@ public class ProductController {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
+    }
+
+    @PostMapping("/setBalance")
+    public ResponseEntity<String> setUserBalance(@RequestBody ProductPrice request) {
+        productService.setProductPrice(request.getProductId(), request.getPrice());
+        return ResponseEntity.ok("Price set successfully");
     }
 
     @PostMapping("/{productId}/delete")

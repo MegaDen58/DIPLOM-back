@@ -77,6 +77,12 @@ public class ProductService {
         return imagePaths;
     }
 
+    public void setProductPrice(Long productId, Integer price) {
+        Product product = productRepository.findById(productId).orElseThrow(() -> new RuntimeException("Product not found"));
+        product.setPrice(price);
+        productRepository.save(product);
+    }
+
     private ProductDto convertToDto(Product product) {
         ProductDto productDto = new ProductDto();
         productDto.setId(product.getId());
