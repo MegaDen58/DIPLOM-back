@@ -25,6 +25,8 @@ public class Product {
     private String description;
 
     private Integer count;
+
+    @Column(name = "price")
     private int price;
 
     private boolean winter;
