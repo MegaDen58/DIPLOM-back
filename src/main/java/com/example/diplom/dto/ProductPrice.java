@@ -2,7 +2,7 @@ package com.example.diplom.dto;
 
 public class ProductPrice {
     private Long productId;
-    private Integer price;
+    private int price;
 
     public void setProductId(Long productId) {
         this.productId = productId;
@@ -16,7 +16,7 @@ public class ProductPrice {
         return productId;
     }
 
-    public Integer getPrice() {
+    public int getPrice() {
         return price;
     }
 }
