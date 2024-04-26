@@ -124,7 +124,8 @@ public class ProductController {
     @PostMapping("/setPrice")
     public ResponseEntity<String> setProductPrice(@RequestBody ProductPrice request) {
         productService.setProductPrice(request.getProductId(), request.getPrice());
-        return ResponseEntity.ok("Price set successfully");
+
+        return ResponseEntity.ok("Price set successfully." + request.getProductId() + request.getPrice());
     }
 
     @PostMapping("/{productId}/delete")
