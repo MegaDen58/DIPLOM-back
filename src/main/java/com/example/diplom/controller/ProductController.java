@@ -2,10 +2,8 @@ package com.example.diplom.controller;
 
 import com.example.diplom.dto.ProductDto;
 import com.example.diplom.dto.ProductPrice;
-import com.example.diplom.dto.UserBalance;
 import com.example.diplom.model.Product;
 import com.example.diplom.service.ProductService;
-import lombok.extern.java.Log;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +23,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/products")

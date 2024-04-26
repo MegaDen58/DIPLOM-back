@@ -78,7 +78,8 @@ public class ProductService {
     }
 
     public void setProductPrice(Long productId, Integer price) {
-        Product product = productRepository.findById(productId).orElseThrow(() -> new RuntimeException("Product not found"));
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
         product.setPrice(price);
         productRepository.save(product);
     }
