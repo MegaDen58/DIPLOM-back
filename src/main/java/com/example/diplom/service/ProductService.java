@@ -1,10 +1,13 @@
 package com.example.diplom.service;
 
+import com.example.diplom.controller.ProductController;
 import com.example.diplom.dto.ProductDto;
 import com.example.diplom.model.Product;
 import com.example.diplom.model.User;
 import com.example.diplom.repository.ProductRepository;
 import com.example.diplom.repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,6 +20,8 @@ import java.util.UUID;
 
 @Service
 public class ProductService {
+
+    private static final Logger logger = LoggerFactory.getLogger(ProductService.class);
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
 
@@ -81,7 +86,9 @@ public class ProductService {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new RuntimeException("Product not found"));
         product.setPrice(price);
+        logger.info(product.toString());
         productRepository.save(product);
+
     }
 
     private ProductDto convertToDto(Product product) {

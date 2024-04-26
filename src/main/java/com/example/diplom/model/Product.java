@@ -31,4 +31,18 @@ public class Product {
     private boolean winter;
 
     private boolean summer;
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", images=" + images +
+                ", description='" + description + '\'' +
+                ", count=" + count +
+                ", price=" + price +
+                ", winter=" + winter +
+                ", summer=" + summer +
+                '}';
+    }
 }
