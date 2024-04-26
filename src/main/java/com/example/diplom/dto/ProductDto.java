@@ -19,5 +19,5 @@ public class ProductDto {
     private int count;
     private boolean winter;
     private boolean summer;
-    private int price;
+    private Integer price;
 }
