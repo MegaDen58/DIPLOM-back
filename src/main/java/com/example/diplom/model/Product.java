@@ -26,8 +26,7 @@ public class Product {
 
     private Integer count;
 
-    @Column(name = "price")
-    private int price;
+    private Integer price;
 
     private boolean winter;
 
