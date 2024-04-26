@@ -57,7 +57,7 @@ public class ProductService {
             List<Product> favoriteProducts = new ArrayList<>();
             for (Integer productId : favoriteIds) {
                 // В данном примере просто создаем объект ProductDto с id продукта
-                Product product = productRepository.findProductById(productId);
+                Product product = productRepository.findById(Long.valueOf(productId)).orElseThrow(() -> new RuntimeException("Product not found"));
                 favoriteProducts.add(product);
             }
             return favoriteProducts;
