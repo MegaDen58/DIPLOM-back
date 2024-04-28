@@ -1,9 +1,12 @@
 package com.example.diplom.service;
 
+import com.example.diplom.dto.ProductDto;
 import com.example.diplom.model.Order;
+import com.example.diplom.model.Product;
 import com.example.diplom.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,5 +23,10 @@ public class OrderService {
 
     public Order createOrder(Order order) {
         return orderRepository.save(order);
+    }
+
+    public List<Order> getAllOrders() {
+        List<Order> orders = orderRepository.findAll();
+        return orders;
     }
 }

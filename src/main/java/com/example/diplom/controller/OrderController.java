@@ -1,5 +1,6 @@
 package com.example.diplom.controller;
 
+import com.example.diplom.dto.ProductDto;
 import com.example.diplom.model.Order;
 import com.example.diplom.service.OrderService;
 import org.springframework.http.HttpStatus;
@@ -27,5 +28,11 @@ public class OrderController {
     public ResponseEntity<Order> createOrder(@RequestBody Order order) {
         Order createdOrder = orderService.createOrder(order);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdOrder);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<Order>> getAllOrders() {
+        List<Order> orders = orderService.getAllOrders();
+        return ResponseEntity.ok(orders);
     }
 }
