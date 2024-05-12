@@ -16,33 +16,15 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
-
     @ElementCollection
     private List<String> images;
-
     private String description;
-
-    private Integer count;
-
     private Integer price;
-
     private boolean winter;
-
     private boolean summer;
+    private String color;
+    private String material;
+    private String size;
 
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", images=" + images +
-                ", description='" + description + '\'' +
-                ", count=" + count +
-                ", price=" + price +
-                ", winter=" + winter +
-                ", summer=" + summer +
-                '}';
-    }
 }

@@ -14,10 +14,27 @@ public class ProductDto {
     private Long id;
     private String name;
     private List<String> images;
-
     private String description;
-    private int count;
     private boolean winter;
     private boolean summer;
     private Integer price;
+    private String color;
+    private String material;
+    private String size;
+
+    @Override
+    public String toString() {
+        return "ProductDto{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", images=" + images +
+                ", description='" + description + '\'' +
+                ", winter=" + winter +
+                ", summer=" + summer +
+                ", price=" + price +
+                ", color='" + color + '\'' +
+                ", material='" + material + '\'' +
+                ", size='" + size + '\'' +
+                '}';
+    }
 }
