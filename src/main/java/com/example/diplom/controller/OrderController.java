@@ -1,6 +1,5 @@
 package com.example.diplom.controller;
 
-import com.example.diplom.dto.ProductDto;
 import com.example.diplom.model.Order;
 import com.example.diplom.service.OrderService;
 import org.springframework.http.HttpStatus;
