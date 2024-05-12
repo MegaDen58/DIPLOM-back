@@ -21,7 +21,6 @@ public class ProductDto {
     private String color;
     private String material;
     private String size;
-
     @Override
     public String toString() {
         return "ProductDto{" +
