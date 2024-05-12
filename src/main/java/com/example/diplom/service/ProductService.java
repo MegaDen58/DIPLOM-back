@@ -96,8 +96,10 @@ public class ProductService {
         productDto.setId(product.getId());
         productDto.setName(product.getName());
         productDto.setDescription(product.getDescription());
-        productDto.setCount(product.getCount());
+        productDto.setColor(product.getColor());
         productDto.setWinter(product.isWinter());
+        product.setSize(productDto.getSize());
+        product.setMaterial(productDto.getMaterial());
         productDto.setSummer(product.isSummer());
         productDto.setImages(product.getImages());
         return productDto;
@@ -108,7 +110,9 @@ public class ProductService {
         product.setId(productDto.getId());
         product.setName(productDto.getName());
         product.setDescription(productDto.getDescription());
-        product.setCount(productDto.getCount());
+        product.setColor(productDto.getColor());
+        product.setSize(productDto.getSize());
+        product.setMaterial(productDto.getMaterial());
         product.setWinter(productDto.isWinter());
         product.setSummer(productDto.isSummer());
         product.setImages(productDto.getImages());
