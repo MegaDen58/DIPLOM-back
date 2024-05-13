@@ -98,8 +98,9 @@ public class ProductService {
         productDto.setDescription(product.getDescription());
         productDto.setColor(product.getColor());
         productDto.setWinter(product.isWinter());
-        product.setSize(productDto.getSize());
-        product.setMaterial(productDto.getMaterial());
+        productDto.setSize(product.getSize());
+        productDto.setPrice(product.getPrice());
+        productDto.setMaterial(product.getMaterial());
         productDto.setSummer(product.isSummer());
         productDto.setImages(product.getImages());
         return productDto;
