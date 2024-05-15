@@ -21,6 +21,8 @@ public class Order {
     private Date start_date;
     private Date end_date;
     private Integer price;
+
+    @Column(name = "user_id")
     private Integer user_id;
     private String type;
 
