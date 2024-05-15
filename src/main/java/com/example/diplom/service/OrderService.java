@@ -19,7 +19,7 @@ public class OrderService {
     }
 
     public List<Order> getOrdersByUserId(Long userId) {
-        return orderRepository.findByUserId(userId);
+        return orderRepository.findByUser_id(userId);
     }
 
     public Order createOrder(Order order) {
