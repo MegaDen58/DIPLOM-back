@@ -25,5 +25,6 @@ public class Order {
     private String type;
 
     @ElementCollection
+    @Column(name="items")
     private List<Integer> items;
 }
