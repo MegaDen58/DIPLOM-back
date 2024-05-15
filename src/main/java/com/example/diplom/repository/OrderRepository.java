@@ -9,4 +9,7 @@ import java.util.List;
 
 public interface OrderRepository extends JpaRepository<Order, Long> {
     @Query("SELECT o.items FROM Order o WHERE o.user_id = :userId")
-    List<Integer> findItemsByUserId(@Param("userId") Long userId);}
+    List<Integer> findItemsByUserId(@Param("userId") Long userId);
+
+    List<Order> findByUserId(Long userId);
+}

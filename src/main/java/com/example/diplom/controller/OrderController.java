@@ -17,6 +17,12 @@ public class OrderController {
         this.orderService = orderService;
     }
 
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<Order>> getOrdersByUserId(@PathVariable Long userId) {
+        List<Order> orders = orderService.getOrdersByUserId(userId);
+        return new ResponseEntity<>(orders, HttpStatus.OK);
+    }
+
     @GetMapping("/user/{userId}/items")
     public ResponseEntity<List<Integer>> getItemsByUserId(@PathVariable Long userId) {
         List<Integer> items = orderService.getItemsByUserId(userId);
