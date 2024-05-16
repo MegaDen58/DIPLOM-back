@@ -33,7 +33,7 @@ public class OrderController {
 
     @GetMapping("/{id}/products")
     public ResponseEntity<List<Product>> getProductsByOrderId(@PathVariable Long id) {
-        List<Product> products = orderService.getProductsByOrderId(id);
+        List<Product> products = orderService.getProductsFromUserCart(id);
         return ResponseEntity.ok(products);
     }
 

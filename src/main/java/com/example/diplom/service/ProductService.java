@@ -88,7 +88,6 @@ public class ProductService {
         product.setPrice(price);
         logger.info(product.toString());
         productRepository.save(product);
-
     }
 
     private ProductDto convertToDto(Product product) {
