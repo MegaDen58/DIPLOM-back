@@ -23,8 +23,8 @@ public class OrderService {
         return orderRepository.findByUser_id(userId);
     }
 
-    public List<Product> getAllItemsById(Long id){
-        return orderRepository.findProductsByOrderId(id);
+    public List<Product> getProductsByOrderId(Long orderId) {
+        return orderRepository.findProductsByOrderId(orderId);
     }
 
     public Order createOrder(Order order) {

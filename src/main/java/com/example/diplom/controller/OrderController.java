@@ -31,10 +31,10 @@ public class OrderController {
     }
 
 
-    @GetMapping("{id}/items")
-    public ResponseEntity<List<Product>> getItemsById(@PathVariable Long id) {
-        List<Product> items = orderService.getAllItemsById(id);
-        return ResponseEntity.ok(items);
+    @GetMapping("/{id}/products")
+    public ResponseEntity<List<Product>> getProductsByOrderId(@PathVariable Long id) {
+        List<Product> products = orderService.getProductsByOrderId(id);
+        return ResponseEntity.ok(products);
     }
 
     @PostMapping("/create")
