@@ -1,6 +1,7 @@
 package com.example.diplom.controller;
 
 import com.example.diplom.model.Order;
+import com.example.diplom.model.Product;
 import com.example.diplom.service.OrderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,13 @@ public class OrderController {
     @GetMapping("/user/{userId}/items")
     public ResponseEntity<List<Integer>> getItemsByUserId(@PathVariable Long userId) {
         List<Integer> items = orderService.getItemsByUserId(userId);
+        return ResponseEntity.ok(items);
+    }
+
+
+    @GetMapping("{id}/items")
+    public ResponseEntity<List<Product>> getItemsById(@PathVariable Long id) {
+        List<Product> items = orderService.getAllItemsById(id);
         return ResponseEntity.ok(items);
     }
 

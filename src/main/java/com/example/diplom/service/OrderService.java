@@ -1,6 +1,7 @@
 package com.example.diplom.service;
 
 import com.example.diplom.model.Order;
+import com.example.diplom.model.Product;
 import com.example.diplom.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,10 @@ public class OrderService {
 
     public List<Order> getOrdersByUserId(Long userId) {
         return orderRepository.findByUser_id(userId);
+    }
+
+    public List<Product> getAllItemsById(Long id){
+        return orderRepository.findProductsByOrderId(id);
     }
 
     public Order createOrder(Order order) {
