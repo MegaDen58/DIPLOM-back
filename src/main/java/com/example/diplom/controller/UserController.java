@@ -66,10 +66,19 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<User> getUserById(@PathVariable Long userId) {
+    public ResponseEntity<UserDto> getUserById(@PathVariable Long userId) {
         User user = userRepository.findById(userId).orElse(null);
         if (user != null) {
-            return ResponseEntity.ok(user);
+            UserDto userDto = new UserDto(
+                    user.getId(),
+                    user.getLogin(),
+                    user.getPassword(),
+                    user.getEmail(),
+                    user.getFavourites(),
+                    user.getBalance(),
+                    userRepository.findRoleNameByUserId(userId)
+            );
+            return ResponseEntity.ok(userDto);
         } else {
             return ResponseEntity.notFound().build();
         }
