@@ -60,7 +60,7 @@ public class UserController {
                         user.getEmail(),
                         user.getFavourites(),
                         user.getBalance(),
-                        user.getRoles()
+                        userRepository.findRoleNameByUserId(user.getId())
                 ))
                 .collect(Collectors.toList());
     }

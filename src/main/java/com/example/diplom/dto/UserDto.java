@@ -18,7 +18,7 @@ public class UserDto {
     private String email;
     private List<Integer> favourites;
     private Integer balance;
-    private Set<Role> roles;
+    private List<String> roles;
 
 
     public UserDto(String login, String password){
