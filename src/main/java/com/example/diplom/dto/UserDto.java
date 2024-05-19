@@ -17,6 +17,7 @@ public class UserDto {
     private List<Integer> favourites;
     private Integer balance;
 
+
     public UserDto(String login, String password){
         this.login = login;
         this.password = password;

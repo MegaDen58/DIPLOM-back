@@ -3,6 +3,7 @@ package com.example.diplom.controller;
 import com.example.diplom.dto.UserBalance;
 import com.example.diplom.dto.UserDto;
 import com.example.diplom.model.User;
+import com.example.diplom.model.UserRole;
 import com.example.diplom.repository.UserRepository;
 import com.example.diplom.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -67,5 +68,9 @@ public class UserController {
     public ResponseEntity<User> setUserBalance(@RequestBody UserBalance request) {
         userService.setUserBalance(request.getUserId(), request.getBalance());
         return ResponseEntity.ok(userRepository.findById(request.getUserId()).orElse(null));
+    }
+    @GetMapping("/{userId}/role")
+    public List<String> getUserRole(@PathVariable Long userId) {
+        return userRepository.findRoleNameByUserId(userId);
     }
 }
