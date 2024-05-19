@@ -30,13 +30,4 @@ public class UserDto {
         this.password = password;
         this.email = email;
     }
-    public UserDto(Long id, String login, String password, String email, List<Integer> favourites, Integer balance, Set<Role> roles) {
-        this.id = id;
-        this.login = login;
-        this.password = password;
-        this.email = email;
-        this.favourites = favourites;
-        this.balance = balance;
-        this.roles = roles;
-    }
 }
