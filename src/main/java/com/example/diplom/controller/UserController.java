@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import com.example.diplom.dto.FavouriteRequest;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/users")
@@ -50,8 +51,18 @@ public class UserController {
     }
 
     @GetMapping("/all")
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public List<UserDto> getAllUsers() {
+        return userRepository.findAll().stream()
+                .map(user -> new UserDto(
+                        user.getId(),
+                        user.getLogin(),
+                        user.getPassword(),
+                        user.getEmail(),
+                        user.getFavourites(),
+                        user.getBalance(),
+                        user.getRoles()
+                ))
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/{userId}")

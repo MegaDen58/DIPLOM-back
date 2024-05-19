@@ -1,5 +1,6 @@
 package com.example.diplom.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,8 +18,10 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
 
     @ManyToMany(mappedBy = "roles")
+    @JsonIgnoreProperties("roles")
     private Set<User> users = new HashSet<>();
 }
