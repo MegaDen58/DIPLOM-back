@@ -30,6 +30,16 @@ public class OrderController {
         return ResponseEntity.ok(items);
     }
 
+    @PostMapping("/delete/{orderId}")
+    public ResponseEntity<String> deleteOrderById(@PathVariable Long orderId) {
+        boolean deleted = orderService.deleteOrderById(orderId);
+        if (deleted) {
+            return ResponseEntity.ok("Order with ID " + orderId + " has been deleted successfully.");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Order with ID " + orderId + " not found.");
+        }
+    }
+
 
     @GetMapping("/{id}/products")
     public ResponseEntity<List<Product>> getProductsByOrderId(@PathVariable Long id) {

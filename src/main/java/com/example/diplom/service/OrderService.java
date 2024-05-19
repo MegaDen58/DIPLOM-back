@@ -43,6 +43,14 @@ public class OrderService {
         }
     }
 
+    public boolean deleteOrderById(Long orderId) {
+        if (orderRepository.existsById(orderId)) {
+            orderRepository.deleteById(orderId);
+            return true;
+        }
+        return false;
+    }
+
     public Order createOrder(Order order) {
         return orderRepository.save(order);
     }
