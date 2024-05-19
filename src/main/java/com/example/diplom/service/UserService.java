@@ -2,18 +2,24 @@ package com.example.diplom.service;
 
 import com.example.diplom.dto.FavouriteRequest;
 import com.example.diplom.dto.UserDto;
+import com.example.diplom.model.Role;
 import com.example.diplom.model.User;
+import com.example.diplom.repository.RoleRepository;
 import com.example.diplom.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
     }
 
     public User registerUser(UserDto userDto) {
@@ -21,6 +27,10 @@ public class UserService {
         user.setLogin(userDto.getLogin());
         user.setPassword(userDto.getPassword());
         user.setEmail(userDto.getEmail());
+        Role userRole = roleRepository.findByName("USER");
+        Set<Role> roles = new HashSet<>();
+        roles.add(userRole);
+        user.setRoles(roles);
         return userRepository.save(user);
     }
     public void setUserBalance(Long userId, Integer balance) {
