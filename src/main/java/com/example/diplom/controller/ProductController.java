@@ -139,4 +139,14 @@ public class ProductController {
         Product updatedProduct = productService.updateProduct(productId, productDto);
         return ResponseEntity.ok(updatedProduct);
     }
+
+    @GetMapping("/{productId}")
+    public ResponseEntity<Product> getProductById(@PathVariable Long productId) {
+        Product product = productService.getProductById(productId);
+        if (product != null) {
+            return ResponseEntity.ok(product);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

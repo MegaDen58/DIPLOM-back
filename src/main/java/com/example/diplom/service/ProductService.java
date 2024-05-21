@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -86,6 +87,11 @@ public class ProductService {
         product.setPrice(price);
         logger.info(product.toString());
         productRepository.save(product);
+    }
+
+    public Product getProductById(Long productId) {
+        Optional<Product> productOptional = productRepository.findById(productId);
+        return productOptional.orElse(null);
     }
 
     public Product updateProduct(Long productId, ProductDto productDto) {
