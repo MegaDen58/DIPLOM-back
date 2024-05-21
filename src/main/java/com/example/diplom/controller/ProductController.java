@@ -133,4 +133,10 @@ public class ProductController {
         productService.deleteProduct(productId);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping("/update/{productId}")
+    public ResponseEntity<Product> updateProduct(@PathVariable Long productId, @RequestBody ProductDto productDto) {
+        Product updatedProduct = productService.updateProduct(productId, productDto);
+        return ResponseEntity.ok(updatedProduct);
+    }
 }

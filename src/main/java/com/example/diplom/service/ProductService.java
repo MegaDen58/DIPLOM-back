@@ -1,6 +1,5 @@
 package com.example.diplom.service;
 
-import com.example.diplom.controller.ProductController;
 import com.example.diplom.dto.ProductDto;
 import com.example.diplom.model.Product;
 import com.example.diplom.model.User;
@@ -50,8 +49,7 @@ public class ProductService {
     }
 
     public Product getProductByImage(String image){
-        Product product = productRepository.findProductByImage(image);
-        return product;
+        return productRepository.findProductByImage(image);
     }
 
     public List<Product> getUserFavourites(Long userId) {
@@ -88,6 +86,23 @@ public class ProductService {
         product.setPrice(price);
         logger.info(product.toString());
         productRepository.save(product);
+    }
+
+    public Product updateProduct(Long productId, ProductDto productDto) {
+        Product existingProduct = productRepository.findById(productId)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+
+        existingProduct.setName(productDto.getName());
+        existingProduct.setDescription(productDto.getDescription());
+        existingProduct.setColor(productDto.getColor());
+        existingProduct.setPrice(productDto.getPrice());
+        existingProduct.setSize(productDto.getSize());
+        existingProduct.setMaterial(productDto.getMaterial());
+        existingProduct.setWinter(productDto.isWinter());
+        existingProduct.setSummer(productDto.isSummer());
+        existingProduct.setImages(productDto.getImages());
+
+        return productRepository.save(existingProduct);
     }
 
     private ProductDto convertToDto(Product product) {
