@@ -43,6 +43,10 @@ public class OrderService {
         }
     }
 
+    public void updateOrderType(Long id, String type) {
+        orderRepository.updateOrderType(id, type);
+    }
+
     public boolean deleteOrderById(Long orderId) {
         if (orderRepository.existsById(orderId)) {
             orderRepository.deleteById(orderId);

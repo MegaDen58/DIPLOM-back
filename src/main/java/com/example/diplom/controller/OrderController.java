@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/orders")
@@ -40,6 +41,13 @@ public class OrderController {
         }
     }
 
+    @PutMapping("/updateType")
+    public ResponseEntity<String> updateOrderType(@RequestBody Map<String, Object> payload) {
+        Long orderId = ((Number) payload.get("orderId")).longValue();
+        String type = (String) payload.get("type");
+        orderService.updateOrderType(orderId, type);
+        return ResponseEntity.ok("Order type updated successfully");
+    }
 
     @GetMapping("/{id}/products")
     public ResponseEntity<List<Product>> getProductsByOrderId(@PathVariable Long id) {
