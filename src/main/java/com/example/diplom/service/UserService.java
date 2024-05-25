@@ -39,6 +39,12 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public void updateUserBalance(Long userId, Integer amountToAdd) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        user.setBalance(user.getBalance() + amountToAdd);
+        userRepository.save(user);
+    }
+
     public User addFavourite(FavouriteRequest favourite) {
         User user = userRepository.findById(favourite.getUserId()).orElseThrow(() -> new RuntimeException("User not found"));
         List<Integer> favourites = user.getFavourites();

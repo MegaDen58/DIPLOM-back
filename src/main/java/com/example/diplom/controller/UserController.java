@@ -84,6 +84,12 @@ public class UserController {
         }
     }
 
+    @PostMapping("/{userId}/updateBalance")
+    public ResponseEntity<User> updateUserBalance(@PathVariable Long userId, @RequestBody Integer amountToAdd) {
+        userService.updateUserBalance(userId, amountToAdd);
+        return ResponseEntity.ok(userRepository.findById(userId).orElse(null));
+    }
+
     @PostMapping("/setBalance")
     public ResponseEntity<User> setUserBalance(@RequestBody UserBalance request) {
         userService.setUserBalance(request.getUserId(), request.getBalance());
