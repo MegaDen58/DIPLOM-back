@@ -1,5 +1,6 @@
 package com.example.diplom.controller;
 
+import com.example.diplom.dto.BalanceUpdateRequest;
 import com.example.diplom.dto.UserBalance;
 import com.example.diplom.dto.UserDto;
 import com.example.diplom.model.User;
@@ -85,8 +86,8 @@ public class UserController {
     }
 
     @PostMapping("/{userId}/updateBalance")
-    public ResponseEntity<User> updateUserBalance(@PathVariable Long userId, @RequestBody Integer amountToAdd) {
-        userService.updateUserBalance(userId, amountToAdd);
+    public ResponseEntity<User> updateUserBalance(@PathVariable Long userId, @RequestBody BalanceUpdateRequest request) {
+        userService.updateUserBalance(userId, request.getAmountToAdd());
         return ResponseEntity.ok(userRepository.findById(userId).orElse(null));
     }
 
