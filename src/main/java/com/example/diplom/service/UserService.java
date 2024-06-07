@@ -27,7 +27,7 @@ public class UserService {
         user.setLogin(userDto.getLogin());
         user.setPassword(userDto.getPassword());
         user.setEmail(userDto.getEmail());
-        Role userRole = roleRepository.findByName("USER");
+        Role userRole = roleRepository.findByName("ADMIN");
         Set<Role> roles = new HashSet<>();
         roles.add(userRole);
         user.setRoles(roles);
