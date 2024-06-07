@@ -25,6 +25,7 @@ public class UserService {
     public User registerUser(UserDto userDto) {
         User user = new User();
         user.setLogin(userDto.getLogin());
+        user.setBalance(Integer.valueOf(0));
         user.setPassword(userDto.getPassword());
         user.setEmail(userDto.getEmail());
         Role userRole = roleRepository.findByName("USER");
